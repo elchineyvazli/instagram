@@ -1,0 +1,32 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "telOrEmail": "dsa",
+      "fullName": "ds",
+      "userName": "adsad",
+      "password": "dsa"
+    },
+    {
+      "id": "0",
+      "telOrEmail": "dsa",
+      "fullName": "dsa",
+      "userName": "dsad",
+      "password": "sad"
+    },
+    {
+      "id": "2",
+      "telOrEmail": "dsa",
+      "fullName": "dsa",
+      "userName": "sda",
+      "password": "dsa"
+    },
+    {
+      "id": "3",
+      "telOrEmail": "dsa",
+      "fullName": "dsa",
+      "userName": "dsa",
+      "password": "sda"
+    }
+  ]
+}
