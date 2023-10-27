@@ -1,0 +1,255 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  text-decoration: none;
+  font-size: 16px;
+  font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
+}
+
+::-moz-selection {
+  background-color: purple;
+  color: white;
+}
+
+::selection {
+  background-color: purple;
+  color: white;
+}
+
+button {
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+input {
+  width: 300px;
+  height: 30px;
+  border: none;
+  outline: none;
+  background: transparent;
+  border-radius: 2px;
+  padding-left: 10px;
+  border: solid 2px lightgray;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  border: solid 1px black;
+  position: relative;
+}
+body .editProfileContainer {
+  position: absolute;
+  width: 400px;
+  height: 600px;
+  border: solid 2px black;
+  background-color: white;
+  top: 55px;
+  left: 550px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+body .editProfileContainer .editProfileInputCloseButton {
+  padding: 5px 10px;
+}
+body .userLocationLeft {
+  width: 15%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  gap: 20px;
+}
+body .userLocationLeft a {
+  font-size: 28px;
+  font-weight: 500;
+  color: black;
+}
+body .userLocationLeft #createButton {
+  width: 88px;
+  height: 24px;
+  font-size: 13px;
+  font-family: 600;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  padding: 0;
+  position: relative;
+}
+body .userLocationLeft #createButton::after {
+  content: "Create +";
+  font-size: 18px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: white;
+  width: 88px;
+  height: 24px;
+  cursor: pointer;
+}
+body .userLocationRight {
+  width: 85%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  border: solid 2px red;
+}
+body .userLocationRight .aboutUserContainer {
+  width: 700px;
+  display: flex;
+  padding: 0 20px;
+  border-bottom: solid 2px lightgrey;
+}
+body .userLocationRight .aboutUserContainer .leftAboutUserImage {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  margin-top: 50px;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 0px -10px;
+}
+body .userLocationRight .aboutUserContainer .rightAboutUserContainer {
+  width: 480px;
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+}
+body .userLocationRight .aboutUserContainer .rightAboutUserContainerTop {
+  width: 100%;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+body .userLocationRight .aboutUserContainer .rightAboutUserContainerTop .userName {
+  font-weight: 500;
+  font-size: 18px;
+}
+body .userLocationRight .aboutUserContainer .rightAboutUserContainerTop .editProfileButton {
+  padding: 6px 15px;
+  background-color: rgb(162, 158, 158);
+  border-radius: 4px;
+  color: white;
+}
+body .userLocationRight .aboutUserContainer .rightAboutUserContainerMiddle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  gap: 110px;
+}
+body .userLocationRight .aboutUserContainer .rightAboutUserContainerMiddle .postsCount,
+body .userLocationRight .aboutUserContainer .rightAboutUserContainerMiddle .followersCount,
+body .userLocationRight .aboutUserContainer .rightAboutUserContainerMiddle .followingCount {
+  position: relative;
+  font-size: 16px;
+  font-weight: 500;
+}
+body .userLocationRight .aboutUserContainer .rightAboutUserContainerMiddle .postsCount::after,
+body .userLocationRight .aboutUserContainer .rightAboutUserContainerMiddle .followersCount::after,
+body .userLocationRight .aboutUserContainer .rightAboutUserContainerMiddle .followingCount::after {
+  content: "";
+  position: absolute;
+}
+body .userLocationRight .aboutUserContainer .rightAboutUserContainerMiddle .postsCount::after {
+  content: "posts";
+  right: -50px;
+  font-weight: 400;
+}
+body .userLocationRight .aboutUserContainer .rightAboutUserContainerMiddle .followersCount::after {
+  content: "followers";
+  right: -80px;
+  font-weight: 400;
+}
+body .userLocationRight .aboutUserContainer .rightAboutUserContainerMiddle .followingCount::after {
+  content: "following";
+  right: -80px;
+  font-weight: 400;
+}
+body .userLocationRight .aboutUserContainer .rightAboutUserContainerBottom {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-left: 100px;
+  padding-top: 20px;
+}
+body .userLocationRight .aboutUserContainer .rightAboutUserContainerBottom .fullName {
+  font-weight: 500;
+}
+body .userLocationRight .userSharedThings {
+  width: 100%;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+body .userLocationRight .userSharedThingsButtons {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+body .userLocationRight .userSharedThingsButtons .userSharedThingsButton {
+  padding: 4px 10px;
+  background-color: aliceblue;
+}
+body .userLocationRight .userSharedThings .sharingThings {
+  width: 100%;
+  height: 400px;
+  background-color: #e0ebf6;
+  overflow: hidden;
+}
+body .userLocationRight .userSharedThings .sharingThings .sharingThingsInside {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.fakeProfilePhoto {
+  width: 160px;
+  height: 160px;
+  position: absolute;
+  left: 45%;
+  top: 45%;
+  z-index: 3;
+  border: solid 1px black;
+  border-radius: 50%;
+}
+.fakeProfilePhoto::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 0;
+  left: 0;
+  filter: blur(20px);
+}/*# sourceMappingURL=userLocation.css.map */
