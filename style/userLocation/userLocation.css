@@ -222,14 +222,92 @@ body .userLocationRight .userSharedThings .sharingThings {
   width: 100%;
   height: 400px;
   background-color: #e0ebf6;
-  overflow: hidden;
+  overflow: auto;
 }
-body .userLocationRight .userSharedThings .sharingThings .sharingThingsInside {
+body .userLocationRight .userSharedThings .sharingThingsInside {
   width: 100%;
   height: 100%;
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+  padding: 20px;
+}
+body .userLocationRight .userSharedThings .sharingThingsInside .postDiv {
+  width: 250px;
+  height: 250px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+body .userLocationRight .userSharedThings .sharingThingsInside .postDivImage {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  transition: 0.6s;
+}
+body .userLocationRight .userSharedThings .sharingThingsInside .postDiv .photoInfo {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 4px;
+  position: absolute;
+  z-index: 10;
+  display: none;
+  left: 20%;
+  top: 50%;
+}
+body .userLocationRight .userSharedThings .sharingThingsInside .postDiv .photoInfo .likeCount {
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+  display: flex;
+  gap: 5px;
+  position: relative;
+}
+body .userLocationRight .userSharedThings .sharingThingsInside .postDiv .photoInfo .likeCount::before {
+  content: "Like : ";
+}
+body .userLocationRight .userSharedThings .sharingThingsInside .postDiv .photoInfo .commentCount {
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+  display: flex;
+  gap: 5px;
+  position: relative;
+}
+body .userLocationRight .userSharedThings .sharingThingsInside .postDiv .photoInfo .commentCount::before {
+  content: "comment : ";
+}
+body .userLocationRight .userSharedThings .sharingThingsInside .postDiv:hover::after {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 9;
+}
+body .userLocationRight .userSharedThings .sharingThingsInside .postDiv:hover .photoInfo {
+  display: block;
+}
+body .postsContainer {
+  width: 800px;
+  height: 500px;
+  overflow: hidden;
+  position: fixed;
+  display: none;
+}
+body .postsContainerInside {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+body .postsContainerInside .upScaledPost {
+  min-width: 800px;
+  height: 100%;
+  display: flex;
 }
 
 .fakeProfilePhoto {

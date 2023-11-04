@@ -242,15 +242,106 @@ body {
                 width: 100%;
                 height: 400px;
                 background-color: #e0ebf6;
-                overflow: hidden;
+                overflow: auto;
 
-                .sharingThingsInside {
+                &Inside {
                     width: 100%;
                     height: 100%;
                     display: flex;
                     flex-wrap: wrap;
                     gap: 20px;
+                    // background-color: red;
+                    padding: 20px;
+
+                    .postDiv {
+                        width: 250px;
+                        height: 250px;
+                        overflow: hidden;
+                        position: relative;
+                        cursor: pointer;
+                        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+
+                        &Image {
+                            width: 100%;
+                            height: 100%;
+                            background-size: cover;
+                            transition: .6s;
+                        }
+
+                        .photoInfo {
+                            display: flex;
+                            align-items: center;
+                            gap: 2px;
+                            padding: 4px;
+                            position: absolute;
+                            z-index: 10;
+                            display: none;
+                            left: 20%;
+                            top: 50%;
+
+                            .likeCount {
+                                font-size: 16px;
+                                font-weight: 500;
+                                color: white;
+                                display: flex;
+                                gap: 5px;
+                                position: relative;
+
+                                &::before {
+                                    content: "Like : ";
+                                }
+                            }
+
+                            .commentCount {
+                                font-size: 16px;
+                                font-weight: 500;
+                                color: white;
+                                display: flex;
+                                gap: 5px;
+                                position: relative;
+
+                                &::before {
+                                    content: "comment : ";
+                                }
+                            }
+                        }
+
+                        &:hover::after {
+                            width: 100%;
+                            height: 100%;
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            content: "";
+                            background-color: rgba(black, .3);
+                            z-index: 9;
+                        }
+
+                        &:hover .photoInfo {
+                            display: block;
+                        }
+                    }
                 }
+            }
+        }
+    }
+
+    .postsContainer {
+        width: 800px;
+        height: 500px;
+        overflow: hidden;
+        position: fixed;
+        display: none;
+
+        &Inside {
+            width: 100%;
+            height: 100%;
+            display: flex;
+
+            .upScaledPost {
+                min-width: 800px;
+                height: 100%;
+                display: flex;
             }
         }
     }

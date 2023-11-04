@@ -1,4 +1,3 @@
-
 let fullName = document.querySelector('.fullName')
 let userName = document.querySelector('.userName')
 let profilePhoto = document.querySelector('.profilePhoto')
@@ -9,117 +8,82 @@ let editProfileButton = document.querySelector('.editProfileButton')
 let userLocationTitle = document.querySelector('.userLocationTitle')
 let body = document.querySelector('body')
 
+let sharingThings = document.querySelector('.sharingThings')
+let sharingThingsInside = document.querySelector('.sharingThingsInside')
+let postsButton = document.querySelector('.posts')
+let reelsButton = document.querySelector('.reels')
+let savedButton = document.querySelector('.saved')
+let taggedButton = document.querySelector('.tagged')
 
-// let gettingStr1 = JSON.stringify(localStorage.getItem(0)).replace(/\\"/g, "").replace(/"/g, "").replace(/{/g, "").replace(/}/g, "")
-let gettingStr = JSON.stringify(localStorage.getItem(0)).replace(/\\"/g, "").replace(/"/g, "").slice(1, localStorage.getItem(0).replace(/\\"/g, "").replace(/"/g, "").length - 1)
-// let gettingStr3 = JSON.stringify(localStorage.getItem(0)).replace(/\\"/g, "").slice(2, localStorage.getItem(0).replace(/\\"/g, "").length - 3)
-// JSON.stringify(localStorage.getItem(0)).replace(/\\"/g, "").slice(0, 1) == "." ?
-let say = 0
-let gettingStrBackLength = 0
-for (let i = 0; i < gettingStr.length; i++) {
-    let word = ""
-    for (let j = i; j < i + 13; j++) {
-        word += gettingStr[j];
-        // console.log(word);
-        if (word == "profilePhoto:") {
-            say++
-        }
+let sharingThingsInsideChildrens = sharingThingsInside.querySelectorAll('*')
+
+if (!localStorage.getItem('postsArr')) {
+    localStorage.setItem("postsArr", "[]")
+}
+if (!localStorage.getItem('postsArrImageUrl')) {
+    localStorage.setItem("postsArrImageUrl", "[]")
+}
+if (!localStorage.getItem('postsArrObjectId')) {
+    localStorage.setItem("postsArrObjectId", "0")
+}
+
+let postsArr = JSON.parse(localStorage.getItem("postsArr"))
+let postsArrImageUrl = JSON.parse(localStorage.getItem("postsArrImageUrl"))
+let postsArrObjectId = JSON.parse(localStorage.getItem("postsArrObjectId"))
+
+if (sharingThingsInsideChildrens.length == 0) {
+    for (let i = 0; i < postsArr.length; i++) {
+
+        sharingThingsInside.innerHTML += `
+        <div class="postDiv">
+        <div class="postDivImage" style="background-image: url(${postsArr[i].postDivImage});"></div>
+        <div class="photoInfo">
+        <p class="likeCount">${postsArr[i].likeCount}</p>
+        <p class="commentCount">${postsArr[i].commentCount}</p>
+        </div>
+        </div>
+        `
     }
-    gettingStrBackLength++
-    if (say == 1) {
-        break;
+    let allPostDiv = document.querySelectorAll('.postDiv')
+    let allLikeCount = document.querySelectorAll('.likeCount')
+    let allCommentCount = document.querySelectorAll('.commentCount')
+    let allSavePhoto = document.querySelectorAll('.savePhoto')
+    let postsContainer = document.createElement('div')
+    postsContainer.classList = "postsContainer"
+    body.appendChild(postsContainer)
+
+    for (let i = 0; i < allPostDiv.length; i++) {
+        allPostDiv[i].addEventListener('click', function () {
+
+        })
     }
-}
-console.log(gettingStrBackLength);
-let subGettingStr = ""
-
-for (let i = 0; i < gettingStrBackLength + 12; i++) {
-    subGettingStr += gettingStr[i]
-}
-console.log(subGettingStr);
-let imgUrlInGettingStr = ""
-
-for (let i = gettingStrBackLength + 12; i < gettingStr.length; i++) {
-    imgUrlInGettingStr += gettingStr[i]
-}
-
-console.log("with comma: ", imgUrlInGettingStr);
-let imgUrlInGettingStr_array = imgUrlInGettingStr.split('')
-for (let i = 0; i < imgUrlInGettingStr_array.length; i++) {
-    if (imgUrlInGettingStr_array[i] == "," || imgUrlInGettingStr_array[i] == ":") {
-        imgUrlInGettingStr_array[i] = ";"
-    }
-}
-let imgUrlInGettingStr_new = imgUrlInGettingStr_array.join("")
-console.log("without comma : ", imgUrlInGettingStr_new);
-
-let superGettingStr = subGettingStr.concat(imgUrlInGettingStr_new)
-console.log(superGettingStr);
-
-// let gettingStrArr = []
-let arr = []
-let objSlicingGettingStr;
-let slicingGettingStr = ""
-let filteredObjStr = ""
-console.log(gettingStr);
-// let a = gettingStr.split(",")
-// console.log(a);
-
-if (imgUrlInGettingStr.slice(0, 1) != ".") {
-    //! If images' url start without "."
-    // gettingStrArr = gettingStr.split("")
-    // console.log(gettingStrArr);    
-    slicingGettingStr = superGettingStr.replace(/:/g, ",")
-    console.log(superGettingStr);
-    arr = slicingGettingStr.split(',')
-    console.log(arr);
-    objSlicingGettingStr = arr.reduce((acc, current, index, arr) => {
-        if (index % 2 === 0) {
-            acc[current] = arr[index + 1];
-        }
-        return acc;
-    }, {});
-    console.log(objSlicingGettingStr);
-
+    console.log(sharingThingsInside);
+    console.log("TRUE");
 } else {
-    //! If images' url start with "."
-    // console.log(superGettingStr)
-    slicingGettingStr = superGettingStr.replace(/:/g, ",")
-    // console.log(slicingGettingStr)
-    arr = slicingGettingStr.split(',')
-    // console.log(arr);
-    objSlicingGettingStr = arr.reduce((acc, current, index, arr) => {
-        if (index % 2 === 0) {
-            acc[current] = arr[index + 1];
-        }
-        return acc;
-    }, {});
-    // console.log(objSlicingGettingStr);
+    console.log(sharingThingsInside.innerHTML.length);
+    console.log("FALSE");
 }
 
-console.log(localStorage.getItem('0'));
+// localStorage.setItem('postsArrImageUrl', JSON.stringify(postsArrImageUrl))
 
-fullName.innerText = objSlicingGettingStr.fullName
-userName.innerText = objSlicingGettingStr.userName
-postsCount.innerText = objSlicingGettingStr.postsCount
-followersCount.innerText = objSlicingGettingStr.followerCount
-followingCount.innerText = objSlicingGettingStr.followingCount
-// profilePhoto.style.backgroundImage = `url(${objSlicingGettingStr.profilePhoto})`
+console.log(postsArr);
+console.log(postsArrImageUrl);
+console.log(postsArrObjectId);
 
-console.log(gettingStr);
-// console.log(gettingStrArr);
-console.log(slicingGettingStr);
-console.log(arr);
-console.log(objSlicingGettingStr);
-console.log(objSlicingGettingStr.profilePhoto);
+let parsedObjFromLocalStorage = JSON.parse(localStorage.getItem(0))
+
+fullName.innerText = parsedObjFromLocalStorage.fullName
+userName.innerText = parsedObjFromLocalStorage.userName
+postsCount.innerText = parsedObjFromLocalStorage.postsCount
+followersCount.innerText = parsedObjFromLocalStorage.followerCount
+followingCount.innerText = parsedObjFromLocalStorage.followingCount
+profilePhoto.style.backgroundImage = `url(${parsedObjFromLocalStorage.profilePhoto})`
 
 profilePhoto.addEventListener('click', () => {
     let fakeProfilePhoto = document.createElement('div')
     fakeProfilePhoto.classList = "fakeProfilePhoto"
     body.appendChild(fakeProfilePhoto)
 })
-let obj;
-//!--------------------
 
 editProfileButton.addEventListener('click', function () {
     let editProfileContainer = document.createElement('div')
@@ -146,143 +110,123 @@ editProfileButton.addEventListener('click', function () {
     editProfileContainer.appendChild(editProfileSaveButton)
     editProfileContainer.appendChild(editProfileCloseButton)
 
-
-    // function replaceNthOccurrence(input, search, replacement, nth) {
-    //     var regExp = new RegExp(search, 'g');
-    //     var match = 0;
-
-    //     return input.replace(regExp, function (match) {
-    //         match++;
-    //         if (match === nth) {
-    //             return replacement;
-    //         } else {
-    //             return match;
-    //         }
-    //     });
-    // }
-
-    let backgroundImage = ""
     editProfileInputImage.addEventListener('change', function () {
         const reader = new FileReader();
         const selectedImage = editProfileInputImage.files[0]
-        // console.log(selectedImage);
-        // if (selectedImage) {
         reader.onload = function (e) {
-            // console.log(e.target.result);
+            console.log(e.target.result);//!
             profilePhoto.style.backgroundImage = `url(${e.target.result})`
-            console.log(e.target.result);
-            obj = JSON.parse(localStorage.getItem("0"))
-            obj.userName = editProfileInputUserName.value;
-            obj.fullName = editProfileInputFullName.value;
-            obj.profilePhoto = e.target.result;
-            // obj.profilePhoto = e.target.result.profilePhoto.replace(/,/g, ";");
-            filteredObjStr = obj.profilePhoto.replace(/,/g, ";").split("")
-
-            for (let a = 0; a < filteredObjStr.length; a++) {
-                if (filteredObjStr[a] == ":") {
-                    filteredObjStr[a] = ";"
-                }
-            }
-            // let a = obj.profilePhoto.replace(/;/g, ",").replace(",", ":")
-            // let b = replaceNthOccurrence(a, ",", ":", 2)
-            console.log(filteredObjStr.join(""));
+            parsedObjFromLocalStorage.userName = editProfileInputUserName.value;
+            parsedObjFromLocalStorage.fullName = editProfileInputFullName.value;
+            parsedObjFromLocalStorage.profilePhoto = e.target.result;
             localStorage.setItem("0", JSON.stringify({
-                ...obj,
-                "profilePhoto": obj.profilePhoto.replace(/;/g, ",").replace(",", ":")
+                ...parsedObjFromLocalStorage,
+                "profilePhoto": parsedObjFromLocalStorage.profilePhoto
             }))
-            console.log(obj);
-            console.log(e.target.result);
-            console.log(localStorage.getItem('0'));
-
-            // gettingStr = JSON.stringify(localStorage.getItem(0)).replace(/\\"/g, "");
-            // slicingGettingStr = gettingStr.slice(1, gettingStr.length - 1).replace(/:/g, ",").slice(1, gettingStr.length - 3)
-            // arr = slicingGettingStr.split(',')
-            // objSlicingGettingStr = arr.reduce((acc, current, index, arr) => {
-            //     if (index % 2 === 0) {
-            //         acc[current] = arr[index + 1];
-            //     }
-            //     return acc;
-            // }, {});
-            // console.log(gettingStr);
-            // console.log(slicingGettingStr);
-            // console.log(arr);
-            // localStorage.setItem('profileImage', objSlicingGettingStr.profilePhoto)
         }
-        // profilePhoto.style.backgroundImage = `url(${editProfileInputImage.files[0].slice(1, editProfileInputImage.files[0].length - 1)})`
         reader.readAsDataURL(selectedImage);
-        console.log(selectedImage);
-
-        // console.log(editProfileInputImage.files[0].slice(1, editProfileInputImage.files[0].length - 1));
-        // profilePhoto.style.backgroundImage = `url(${editProfileInputImage.files[0].slice(1, editProfileInputImage.files[0].length - 1)})`
-        backgroundImage = profilePhoto.style.backgroundImage
-        // backgroundImage = editProfileInputImage.files[0].slice(1, editProfileInputImage.files[0].length - 1)
-        // let obj = JSON.parse(localStorage.getItem("0"))
-        // obj.userName = editProfileInputUserName.value;
-        // obj.fullName = editProfileInputFullName.value;
-        // obj.profilePhoto = backgroundImage;
-        // localStorage.setItem("0", JSON.stringify(obj))
     })
     editProfileSaveButton.addEventListener('click', function () {
-        // let backgroundImage = profilePhoto.style.backgroundImage.slice(6, profilePhoto.style.backgroundImage.length - 2)
-        // profilePhoto.style.backgroundImage = `url(${editProfileInputImage.files[0].slice(1, editProfileInputImage.files[0].length - 1)})`
-        // let backgroundImage = profilePhoto.style.backgroundImage
-        // let obj = JSON.parse(localStorage.getItem("0"))
-        // obj.userName = editProfileInputUserName.value;
-        // obj.fullName = editProfileInputFullName.value;
-        // obj.profilePhoto = backgroundImage;
-        // localStorage.setItem("0", JSON.stringify(obj))
-        // let a = obj.profilePhoto.replace(/;/g, ",").replace(",", ":")
-        // let b = replaceNthOccurrence(a, ";", ":", 2)
-        fetch(`http://localhost:3000/users/${objSlicingGettingStr.id}`, {
+        fetch(`http://localhost:3000/users/${parsedObjFromLocalStorage.id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                ...obj,
-                "profilePhoto": obj.profilePhoto.replace(/;/g, ",").replace(",", ":")
+                ...parsedObjFromLocalStorage,
+                "profilePhoto": parsedObjFromLocalStorage.profilePhoto
             })
         })
-        // fetch(`http://localhost:3000/users/${objSlicingGettingStr.id}`)
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         obj = data.users[Number(objSlicingGettingStr.id)]
-        //     })
         body.removeChild(editProfileContainer)
     })
-
 
     editProfileCloseButton.addEventListener('click', function () {
         body.removeChild(editProfileContainer)
     })
-
     body.appendChild(editProfileContainer)
 })
 
-let sharingThings = document.querySelector('.sharingThings')
-let postsButton = document.querySelector('.posts')
-let reelsButton = document.querySelector('.reels')
-let savedButton = document.querySelector('.saved')
-let taggedButton = document.querySelector('.tagged')
-
-sharingThings.innerHTML = "posts"
 
 postsButton.addEventListener('click', function () {
-    sharingThings.innerHTML = "posts"
+    sharingThingsInside.innerHTML = "posts"
 })
 reelsButton.addEventListener('click', function () {
-    sharingThings.innerHTML = "reels"
+    sharingThingsInside.innerHTML = "reels"
 })
 savedButton.addEventListener('click', function () {
-    sharingThings.innerHTML = "saved"
+    sharingThingsInside.innerHTML = "saved"
 })
 taggedButton.addEventListener('click', function () {
-    sharingThings.innerHTML = "tagged"
+    sharingThingsInside.innerHTML = "tagged"
 })
 
 let createButton = document.getElementById('createButton');
 
 createButton.addEventListener('change', () => {
+    const reader = new FileReader();
     const selectedImage = createButton.files[0]
-    console.log(selectedImage);
+
+    let postDiv = document.createElement('div')
+    let postDivImage = document.createElement('img')
+    let likeCount = document.createElement('p')
+    let commentCount = document.createElement('p')
+    let countsInfo = document.createElement('div')
+
+    postDiv.classList = "postDiv"
+    likeCount.classList = "likeCount"
+    commentCount.classList = "commentCount"
+    countsInfo.classList = "countsInfo"
+    postDivImage.classList = "postDivImage"
+
+    likeCount.innerText = "0"
+    commentCount.innerText = "0"
+
+    let obj = Object.create({})
+    postsArrObjectId++
+    localStorage.setItem("postsArrObjectId", postsArrObjectId)
+    obj.id = localStorage.getItem('postsArrObjectId')
+    reader.onload = function (e) {
+        postDivImage.src = `${e.target.result}`
+        sharingThingsInside.innerHTML += `
+        <div class="postDiv">
+        <div style="background-image: url(${e.target.result})" class="postDivImage"></div>
+        <div class="photoInfo">
+        <p class="likeCount">${obj.likeCount}</p>
+        <p class="commentCount">${obj.commentCount}</p>
+        </div>
+        </div>
+        `
+        obj.postDivImage = e.target.result
+        localStorage.setItem("postsArrImageUrl", JSON.stringify(obj))
+        console.log(obj);
+
+
+        // likeCount.innerText = "0"
+        // commentCount.innerText = "0"
+        obj.likeCount = likeCount.innerText
+        obj.commentCount = commentCount.innerText
+        console.log(obj);
+        obj.postDivImage = JSON.parse(localStorage.getItem("postsArrImageUrl")).postDivImage
+        postsArr.push(obj)
+        localStorage.setItem("postsArr", JSON.stringify(postsArr))
+    }
+    likeCount.innerText = "0"
+    commentCount.innerText = "0"
+
+    //! Bu fetch'i silme, sonradan aktivlesdirersen))
+    fetch(`http://localhost:3000/users/${parsedObjFromLocalStorage.id}`)
+        .then(res => res.json())
+        .then(data => {
+            data.posts.push(obj)
+
+            return fetch(`http://localhost:3000/users/${parsedObjFromLocalStorage.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+        })
+
+    reader.readAsDataURL(selectedImage);
 })
