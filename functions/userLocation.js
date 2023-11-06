@@ -31,6 +31,8 @@ let postsArr = JSON.parse(localStorage.getItem("postsArr"))
 let postsArrImageUrl = JSON.parse(localStorage.getItem("postsArrImageUrl"))
 let postsArrObjectId = JSON.parse(localStorage.getItem("postsArrObjectId"))
 
+let parsedObjFromLocalStorage = JSON.parse(localStorage.getItem(0))
+
 if (sharingThingsInsideChildrens.length == 0) {
     for (let i = 0; i < postsArr.length; i++) {
 
@@ -44,23 +46,117 @@ if (sharingThingsInsideChildrens.length == 0) {
         </div>
         `
     }
+
+    // fetch(`http://localhost:3000/users/${parsedObjFromLocalStorage.id}`)
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         for (let i = 0; i < data.posts.length; i++) {
+    //             if (i == parsedObjFromLocalStorage.id - 1) {
+    //                 for (let j = 0; j < data[i].posts.length; j++) {
+    //                     sharingThingsInside.innerHTML += `
+    //             <div class="postDiv">
+    //             <div class="postDivImage" style="background-image: url(${data.posts[i].postDivImage});"></div>
+    //             <div class="photoInfo">
+    //             <p class="likeCount">${data.posts[i].likeCount}</p>
+    //             <p class="commentCount">${data.posts[i].commentCount}</p>
+    //             </div>
+    //             </div>
+    //             `
+    //                 }
+    //             }
+    //         }
+    //         console.log(data.posts[0]);
+    //     })
+    //     .catch(err => console.log(err))
+
+    //! CREATE ELEMENT
     let allPostDiv = document.querySelectorAll('.postDiv')
     let allLikeCount = document.querySelectorAll('.likeCount')
     let allCommentCount = document.querySelectorAll('.commentCount')
     let allSavePhoto = document.querySelectorAll('.savePhoto')
+
+    //! CREATE ELEMENT
     let postsContainer = document.createElement('div')
+    let fakePostsContainer = document.createElement('div')
+    // let postsContainerInside = document.createElement('div')
+    let postsContainerCloseButton = document.createElement('button')
+    let postsContainerLeftButton = document.createElement('button')
+    let postsContainerRightButton = document.createElement('button')
+
+    let fakePostsContainerLeft = document.createElement('div')
+    let fakePostsContainerRight = document.createElement('div')
+    let fakePostsContainerRightTop = document.createElement('div')
+    let fakePostsContainerRightMiddle = document.createElement('div')
+    let fakePostsContainerRightMiddleInside = document.createElement('div')
+    let fakePostsContainerRightBottom = document.createElement('div')
+
+    let fakePostsContainerCommentInput = document.createElement('input')
+
+    //! CLASSLIST ELEMENT
     postsContainer.classList = "postsContainer"
-    body.appendChild(postsContainer)
+    fakePostsContainer.classList = "fakePostsContainer"
+    // postsContainerInside.classList = "postsContainerInside"
+    postsContainerCloseButton.classList = "postsContainerCloseButton"
+    postsContainerLeftButton.classList = "postsContainerLeftButton"
+    postsContainerRightButton.classList = "postsContainerRightButton"
+
+    fakePostsContainerLeft.classList = 'fakePostsContainerLeft'//! container sol terefi
+    fakePostsContainerRight.classList = 'fakePostsContainerRight'//! container sag terefi
+    fakePostsContainerRightTop.classList = 'fakePostsContainerRightTop'//! container sag terefi ustu
+    fakePostsContainerRightMiddle.classList = 'fakePostsContainerRightMiddle'//! container sag terefi ortasi
+    // fakePostsContainerRightMiddleInside.classList = 'fakePostsContainerRightMiddleInside'
+    fakePostsContainerRightBottom.classList = 'fakePostsContainerRightBottom'//! container sag terefi asagisi
+    fakePostsContainerCommentInput.classList = 'fakePostsContainerCommentInput'//! container sag terefi asagi input
+
+    postsContainer.appendChild(fakePostsContainer)
+
+    // fakePostsContainer.appendChild(postsContainerInside)
+
+    fakePostsContainer.appendChild(postsContainerCloseButton)
+    fakePostsContainer.appendChild(postsContainerLeftButton)
+    fakePostsContainer.appendChild(postsContainerRightButton)
+    fakePostsContainer.appendChild(fakePostsContainerLeft)
+    fakePostsContainer.appendChild(fakePostsContainerRight)
+
+    fakePostsContainerRight.appendChild(fakePostsContainerRightTop)
+    fakePostsContainerRight.appendChild(fakePostsContainerRightMiddle)
+    fakePostsContainerRight.appendChild(fakePostsContainerRightBottom)
+
+    fakePostsContainerRightBottom.appendChild(fakePostsContainerCommentInput)
+
+    // fakePostsContainer.appendChild()
+
+    postsContainerLeftButton.innerHTML = "<-"
+    postsContainerRightButton.innerHTML = "->"
+
+    postsContainerCloseButton.innerHTML = "x"
+
+    postsContainerCloseButton.addEventListener('click', () => {
+        body.removeChild(postsContainer)
+    })
+
+    postsCount.innerHTML = postsArr.length
 
     for (let i = 0; i < allPostDiv.length; i++) {
         allPostDiv[i].addEventListener('click', function () {
-
+            for (let j = 0; j < postsArr.length; j++) {
+                if (j == i) {
+                    fakePostsContainerLeft.style.backgroundImage = `url(${postsArr[j].postDivImage})`
+                    console.log("OLDU", i, j);
+                    // console.log(postsArr[j]);
+                } else {
+                    console.log("OLMADI");
+                }
+            }
+            body.appendChild(postsContainer)
         })
     }
+
+
     console.log(sharingThingsInside);
     console.log("TRUE");
 } else {
-    console.log(sharingThingsInside.innerHTML.length);
+    console.log(sharingThingsInside.length);
     console.log("FALSE");
 }
 
@@ -70,11 +166,10 @@ console.log(postsArr);
 console.log(postsArrImageUrl);
 console.log(postsArrObjectId);
 
-let parsedObjFromLocalStorage = JSON.parse(localStorage.getItem(0))
 
 fullName.innerText = parsedObjFromLocalStorage.fullName
 userName.innerText = parsedObjFromLocalStorage.userName
-postsCount.innerText = parsedObjFromLocalStorage.postsCount
+postsCount.innerText = postsArr.length
 followersCount.innerText = parsedObjFromLocalStorage.followerCount
 followingCount.innerText = parsedObjFromLocalStorage.followingCount
 profilePhoto.style.backgroundImage = `url(${parsedObjFromLocalStorage.profilePhoto})`
@@ -148,7 +243,24 @@ editProfileButton.addEventListener('click', function () {
 
 
 postsButton.addEventListener('click', function () {
-    sharingThingsInside.innerHTML = "posts"
+    // if (sharingThingsInsideChildrens.length > 0) {
+    fetch(`http://localhost:3000/users`)
+        .then(res => res.json())
+        .then(data => {
+            for (let i = 0; i < postsArr.length; i++) {
+                sharingThingsInside.innerHTML += `
+                <div class="postDiv">
+                <div class="postDivImage" style="background-image: url(${data.posts[i].postDivImage});"></div>
+                <div class="photoInfo">
+                <p class="likeCount">${data.posts[i].likeCount}</p>
+                <p class="commentCount">${data.posts[i].commentCount}</p>
+                </div>
+                </div>
+                `
+            }
+        })
+        .catch(err => console.log(err))
+    // }
 })
 reelsButton.addEventListener('click', function () {
     sharingThingsInside.innerHTML = "reels"
@@ -178,8 +290,8 @@ createButton.addEventListener('change', () => {
     countsInfo.classList = "countsInfo"
     postDivImage.classList = "postDivImage"
 
-    likeCount.innerText = "0"
-    commentCount.innerText = "0"
+    // likeCount.innerText = "0"
+    // commentCount.innerText = "0"
 
     let obj = Object.create({})
     postsArrObjectId++
@@ -200,9 +312,8 @@ createButton.addEventListener('change', () => {
         localStorage.setItem("postsArrImageUrl", JSON.stringify(obj))
         console.log(obj);
 
+        postsCount.innerHTML = postsArr.length
 
-        // likeCount.innerText = "0"
-        // commentCount.innerText = "0"
         obj.likeCount = likeCount.innerText
         obj.commentCount = commentCount.innerText
         console.log(obj);
