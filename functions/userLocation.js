@@ -89,7 +89,11 @@ if (sharingThingsInsideChildrens.length == 0) {
     let fakePostsContainerRightMiddle = document.createElement('div')
     let fakePostsContainerRightMiddleInside = document.createElement('div')
     let fakePostsContainerRightBottom = document.createElement('div')
+    let containerProfileImage = document.createElement('img')
+    let containerUserName = document.createElement('p')
 
+    let containerCommentInputContainer = document.createElement('div')
+    let containerCommentSendButton = document.createElement('button')
     let fakePostsContainerCommentInput = document.createElement('input')
 
     //! CLASSLIST ELEMENT
@@ -104,13 +108,19 @@ if (sharingThingsInsideChildrens.length == 0) {
     fakePostsContainerRight.classList = 'fakePostsContainerRight'//! container sag terefi
     fakePostsContainerRightTop.classList = 'fakePostsContainerRightTop'//! container sag terefi ustu
     fakePostsContainerRightMiddle.classList = 'fakePostsContainerRightMiddle'//! container sag terefi ortasi
-    // fakePostsContainerRightMiddleInside.classList = 'fakePostsContainerRightMiddleInside'
+    fakePostsContainerRightMiddleInside.classList = 'fakePostsContainerRightMiddleInside'
     fakePostsContainerRightBottom.classList = 'fakePostsContainerRightBottom'//! container sag terefi asagisi
+    containerCommentInputContainer.classList = 'containerCommentInputContainer'//! container sag terefi asagi input
+    containerCommentSendButton.classList = 'containerCommentSendButton'//! container sag terefi asagi input
     fakePostsContainerCommentInput.classList = 'fakePostsContainerCommentInput'//! container sag terefi asagi input
+    containerProfileImage.classList = "containerProfileImage"
+    containerUserName.classList = "containerUserName"
 
     postsContainer.appendChild(fakePostsContainer)
 
     // fakePostsContainer.appendChild(postsContainerInside)
+
+    containerCommentSendButton.textContent = "Send"
 
     fakePostsContainer.appendChild(postsContainerCloseButton)
     fakePostsContainer.appendChild(postsContainerLeftButton)
@@ -122,8 +132,36 @@ if (sharingThingsInsideChildrens.length == 0) {
     fakePostsContainerRight.appendChild(fakePostsContainerRightMiddle)
     fakePostsContainerRight.appendChild(fakePostsContainerRightBottom)
 
-    fakePostsContainerRightBottom.appendChild(fakePostsContainerCommentInput)
+    fakePostsContainerRightMiddle.appendChild(fakePostsContainerRightMiddleInside)
+    fakePostsContainerRightBottom.appendChild(containerCommentInputContainer)
+    containerCommentInputContainer.appendChild(fakePostsContainerCommentInput)
+    containerCommentInputContainer.appendChild(containerCommentSendButton)
+    fakePostsContainerRightTop.appendChild(containerProfileImage)
+    fakePostsContainerRightTop.appendChild(containerUserName)
 
+    containerCommentSendButton.addEventListener('click', function () {
+        if (fakePostsContainerCommentInput.value != "") {
+            fakePostsContainerRightMiddleInside.innerHTML += `
+            <div class="fakePostsMessageContainer">
+            <p class="fakePostsMessage">${fakePostsContainerCommentInput.value}</p>
+            <button class="removeButton">Remove</button>
+            </div>
+            `
+        }
+        fakePostsContainerCommentInput.value = ""
+    })
+
+    if (fakePostsContainerRightMiddleInside.length > 0) {
+        let fakePostsMessageContainer = document.querySelector('.fakePostsMessageContainer')
+        let removeButton = document.querySelector('.removeButton')
+        removeButton.addEventListener('click', () => {
+            fakePostsContainerRightMiddleInside.removeChild(fakePostsMessageContainer)
+        })
+    }
+
+    containerUserName.innerText = parsedObjFromLocalStorage.userName
+    containerProfileImage.src = parsedObjFromLocalStorage.profilePhoto
+    containerProfileImage.alt = "err"
     // fakePostsContainer.appendChild()
 
     postsContainerLeftButton.innerHTML = "<-"

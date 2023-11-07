@@ -327,29 +327,102 @@ body .postsContainer .fakePostsContainerRight .fakePostsContainerRightTop {
   height: 40px;
   display: flex;
   align-items: center;
+  gap: 10px;
   padding-left: 40px;
   border: solid 2px white;
+}
+body .postsContainer .fakePostsContainerRight .fakePostsContainerRightTop .containerProfileImage {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+body .postsContainer .fakePostsContainerRight .fakePostsContainerRightTop .containerUserName {
+  font-size: 16px;
 }
 body .postsContainer .fakePostsContainerRight .fakePostsContainerRightMiddle {
   width: 100%;
   height: 350px;
+  overflow: hidden;
+  border: solid 2px red;
+  position: relative;
+}
+body .postsContainer .fakePostsContainerRight .fakePostsContainerRightMiddleInside {
+  width: 497px;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  border: solid 2px red;
+  gap: 10px;
+  overflow: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+body .postsContainer .fakePostsContainerRight .fakePostsContainerRightMiddleInside .fakePostsMessageContainer {
+  width: 450px;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+body .postsContainer .fakePostsContainerRight .fakePostsContainerRightMiddleInside .fakePostsMessageContainer .fakePostsMessage {
+  width: 70%;
+  word-break: break-all;
+  overflow: hidden;
+}
+body .postsContainer .fakePostsContainerRight .fakePostsContainerRightMiddleInside .fakePostsMessageContainer .removeButton {
+  position: relative;
+}
+body .postsContainer .fakePostsContainerRight .fakePostsContainerRightMiddleInside .fakePostsMessageContainer .removeButton::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 2px;
+  width: 100%;
+  height: 1px;
+  background-color: black;
+}
+body .postsContainer .fakePostsContainerRight .fakePostsContainerRightMiddle .fakePostsContainerRightMiddleInside::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  background-color: #F5F5F5;
+}
+body .postsContainer .fakePostsContainerRight .fakePostsContainerRightMiddle .fakePostsContainerRightMiddleInside::-webkit-scrollbar {
+  width: 12px;
+  background-color: #F5F5F5;
+}
+body .postsContainer .fakePostsContainerRight .fakePostsContainerRightMiddle .fakePostsContainerRightMiddleInside::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #555;
 }
 body .postsContainer .fakePostsContainerRight .fakePostsContainerRightBottom {
   width: 100%;
   height: 110px;
   display: flex;
-  border: solid 2px white;
+  flex-direction: column;
+  border: solid 2px black;
 }
-body .postsContainer .fakePostsContainerRight .fakePostsContainerRightBottom .fakePostsContainerCommentInput {
+body .postsContainer .fakePostsContainerRight .fakePostsContainerRightBottom .containerCommentInputContainer {
   width: 100%;
+  height: 35px;
+  color: black;
+  display: flex;
+  gap: 5px;
+}
+body .postsContainer .fakePostsContainerRight .fakePostsContainerRightBottom .containerCommentInputContainer .fakePostsContainerCommentInput {
+  width: 440px;
+  height: 100%;
+}
+body .postsContainer .fakePostsContainerRight .fakePostsContainerRightBottom .containerCommentInputContainer .containerCommentSendButton {
+  padding: 5px 5px;
+  background-color: orangered;
   color: white;
+  border-radius: 4px;
 }
 body .postsContainerCloseButton {
   position: absolute;
-  top: 10px;
+  top: 0px;
   right: 20px;
   font-size: 30px;
   color: black;
@@ -357,8 +430,9 @@ body .postsContainerCloseButton {
 }
 body .postsContainerRightButton, body .postsContainerLeftButton {
   position: absolute;
-  color: white;
+  color: red;
   font-weight: 600;
+  font-size: 25px;
 }
 body .postsContainerLeftButton {
   left: 20px;
